@@ -1,74 +1,72 @@
-function main(event){
-    var inputedLetter = document.getElementById("input").value.toLowerCase()
-    if (event.key == "Enter" && inputedLetter != "" && gameOver == false && inputedLetter.length == 1){
-        if (wordToGuess.includes(inputedLetter)){
-                var indexesToChange = []
-            for (counter = 0; counter < wordToGuess.length; counter ++){
-                if (wordToGuess[counter] == inputedLetter){
-                    indexesToChange.push(counter)
+function main(event){ // The main functoin. Triggered when a key is pressed in the input box.
+    var inputedLetter = document.getElementById("input").value.toLowerCase() // The value of the text input in lower case.
+    if (event.key == "Enter" && inputedLetter != "" && gameOver == false && inputedLetter.length == 1){ // If the key that was pressed is enter, the game has not been won or lost, and the value of the input box is only one character.
+        if (wordToGuess.includes(inputedLetter)){ // If the letter in the input box is in the word that is being guessed
+                var indexesToChange = [] // This will be the indexes of the word that the guessed letter is in
+            for (counter = 0; counter < wordToGuess.length; counter ++){ // For every letter in the word to be guessed
+                if (wordToGuess[counter] == inputedLetter){ // If the letter is the guessed letter
+                    indexesToChange.push(counter) // add its index to the end of indexesToChange
                 }
             }
-            var oldletters = document.getElementById("word").innerHTML.split("")
-            for (counter = 0; counter < indexesToChange.length; counter ++){
-                oldletters[indexesToChange[counter]*2] = inputedLetter
+            var oldletters = document.getElementById("word").innerHTML.split("") // Split the word being desplayed (including the _s) so that each character is a separate item in the list
+            for (counter = 0; counter < indexesToChange.length; counter ++){ // for every item in indexesToChange
+                oldletters[indexesToChange[counter]*2] = inputedLetter // set the corrisponding item in the duplacate of the deplayed text which will be _ to the inputed letter
             }
-            document.getElementById("word").innerHTML = oldletters.join("")
-            if (oldletters.includes("_") == false){
-                gameOver = true
-                document.getElementById("word").style.color = "green"
-                document.getElementById("reload").style.display = "unset"
+            document.getElementById("word").innerHTML = oldletters.join("") // set the actual display to the duplacate display converted to a string
+            if (oldletters.includes("_") == false){ // if the are no _s (unguessed letters) in the duplacate display
+                gameOver = true // end the game
+                document.getElementById("word").style.color = "green" // set the guessed word to green
+                document.getElementById("reload").style.display = "unset" // make the play again button visible
             }
-        } else {
-            document.getElementById("wrongLetters").innerHTML += inputedLetter + " "
-            wrongGuesses ++
-            ctx.beginPath()
-            if (hangmanDrawing[wrongGuesses][0] != "circle"){
-                ctx.moveTo(hangmanDrawing[wrongGuesses][0]*canvasScale, hangmanDrawing[wrongGuesses][1]*canvasScale)
-                ctx.lineTo(hangmanDrawing[wrongGuesses][2]*canvasScale,hangmanDrawing[wrongGuesses][3]*canvasScale)
-            } else {
-                ctx.arc(hangmanDrawing[wrongGuesses][1]*canvasScale,hangmanDrawing[wrongGuesses][2]*canvasScale,hangmanDrawing[wrongGuesses][3]*canvasScale,0,2*Math.PI)
+        } else { // if the word does not include the guessed letter
+            document.getElementById("wrongLetters").innerHTML += inputedLetter + " " // add the guessed letter to the line of crossed out letters at the bottom of the page followed by a space
+            wrongGuesses ++ // add one to the number of wrong guesses made
+            ctx.beginPath() // start a drawn path (for another line in the hangman)
+            if (hangmanDrawing[wrongGuesses][0] != "circle"){ // if the first item of list inside of hangmanDrawing whichs index relates to the number of wrong guesses you have made is not circle
+                ctx.moveTo(hangmanDrawing[wrongGuesses][0]*canvasScale, hangmanDrawing[wrongGuesses][1]*canvasScale) // to the posstion dictated by the list
+                ctx.lineTo(hangmanDrawing[wrongGuesses][2]*canvasScale,hangmanDrawing[wrongGuesses][3]*canvasScale) // set the thing to be drawn to be a line whichs position is dictated by hangmanDrawing
+            } else { // if the first item of the list is circle
+                ctx.arc(hangmanDrawing[wrongGuesses][1]*canvasScale,hangmanDrawing[wrongGuesses][2]*canvasScale,hangmanDrawing[wrongGuesses][3]*canvasScale,0,2*Math.PI) // set the thing to be drawn to be a circle whichs position is dictated by hangmanDrawing
             }
-            ctx.stroke()
-            if(wrongGuesses == 10){
-                gameOver = true
-                document.getElementById("word").innerHTML = wordToGuess.join(" ")
-                document.getElementById("word").style.color = "red"
-                document.getElementById("reload").style.display = "unset"
+            ctx.stroke() // draw the things set by lineTo and arc
+            if(wrongGuesses == 10){ // if ten wrong guesses have been made and therefor the hangman been fully drawn
+                gameOver = true // end the game
+                document.getElementById("word").innerHTML = wordToGuess.join(" ") // set the guessed word to the correct word revaing it
+                document.getElementById("word").style.color = "red" // set the gussed words color (now the correct word) to be red
+                document.getElementById("reload").style.display = "unset" // show the play again button
             }
         }
-        document.getElementById("input").value = ""
+        document.getElementById("input").value = "" // clear the input box
     }
 }
-function init(){
-    enter = false
-    document.getElementById("hangmanCanvas").width = window.innerWidth/3
-    document.getElementById("hangmanCanvas").height = window.innerWidth/3
-    document.getElementById("input").addEventListener("keydown", function(event){main(event)})
-    ctx = document.getElementById("hangmanCanvas").getContext("2d")
-    canvasScale = document.getElementById("hangmanCanvas").width/100
-    hangmanDrawing = [[5,95,30,95],[17,95,17,20],[17,20,83,20],[17,30,37,20],[83,20,83,30],['circle',83,40,10], [83,50,83,80], [83,50,73,60], [83,50,93,60], [83,80,73,95], [83,80,93,95]]
-    var xhttp = new XMLHttpRequest()
-    xhttp.onreadystatechange = function() {
+function init(){ // run when the body loads
+    document.getElementById("hangmanCanvas").width = window.innerWidth/3 // size the canvas based on the size of the window
+    document.getElementById("hangmanCanvas").height = window.innerWidth/3 // size the canvas based on the size of the window
+    document.getElementById("input").addEventListener("keydown", function(event){main(event)}) // make it so that when a key is pressed inside the input box main(event) will run with event being the event 
+    ctx = document.getElementById("hangmanCanvas").getContext("2d") // get the context of the canvas
+    canvasScale = document.getElementById("hangmanCanvas").width/100 // create a unit equil to 1/100
+    hangmanDrawing = [[5,95,30,95],[17,95,17,20],[17,20,83,20],[17,30,37,20],[83,20,83,30],['circle',83,40,10], [83,50,83,80], [83,50,73,60], [83,50,93,60], [83,80,73,95], [83,80,93,95]] // the positions for all thi e lines in the hangman
+    var xhttp = new XMLHttpRequest() // create a XMLHttpRequest called xhhtp
+    xhttp.onreadystatechange = function() { // when the XMLHttpRequest becomes ready (the file with the words in it is loaded) run a function
     if (this.readyState == 4 && this.status == 200) {
-        // Typical action to be performed when the document is ready:
-        wordToGuess = xhttp.responseText
-        wordToGuess = wordToGuess.split("\n")
-        wordToGuess = wordToGuess[Math.floor(Math.random()*wordToGuess.length)]
-        wordToGuess = wordToGuess.toLowerCase()
-        wordToGuess = wordToGuess.split("")
-        wordToGuess.pop()
-        wrongGuesses = -1
-        gameOver = false
-        for (counter = wordToGuess.length; counter > 0; counter -= 1){
-            document.getElementById("word").innerHTML += "_ "
+        wordToGuess = xhttp.responseText // set wordToGuess to be the contense of the file
+        wordToGuess = wordToGuess.split("\n") // turn the file into a list where the delimters are where there were origanaly line breaks
+        wordToGuess = wordToGuess[Math.floor(Math.random()*wordToGuess.length)] // set the word that will be guessed to a random item in the file
+        wordToGuess = wordToGuess.toLowerCase() // make every letter in the word lower case
+        wordToGuess = wordToGuess.split("") // make each letter in the word a difarant item in a list
+        wordToGuess.pop() // remove the last item as it is always a blank string
+        wrongGuesses = -1 // set the number of wrong guesses to -1 so when 1 is added it becomes 0
+        gameOver = false // define gameOver when this is true most of main  will not run
+        for (counter = wordToGuess.length; counter > 0; counter -= 1){ // for every letter in the chosen word
+            document.getElementById("word").innerHTML += "_ " // add an underscore to the visible word (which was origanlay blank)
         }
         }
     }
-    xhttp.open("GET", "nouns.csv", true);
-    xhttp.send();
+    xhttp.open("GET", "nouns.csv", true) // set the XMLHttpRequest to be get nouns.csv (a long list of nouns)
+    xhttp.send() // send the request
 
 
 }
-function replay(){
-    location.reload()
+function replay(){ // activated if the play again button is pressed. the button is hidded until the game is over
+    location.reload() // reload the game
 }

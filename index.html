@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <title>Hangman</title>
+    <script src="script.js"></script> <!-- import the script -->
+    <link rel="stylesheet" href="style.css"> <!-- import the stylesheet -->
 </head>
 <body onload="init()">
-    <canvas id="hangmanCanvas"></canvas>
+    <canvas id="hangmanCanvas"></canvas> <!--define the canvas-->
     <br>
-    <span id="word" class="word"></span>
+    <span id="word" class="word"></span><!--define the place where your correctly guessed letters will appear-->
     <br>
-    <input type="text" id="input", maxlength="1">
+    <input type="text" id="input", maxlength="1"> <!--make an input you can only enter one letter into-->
     <br>
-    <span id="wrongLetters" class='wrongLetters'></span>
+    <span id="wrongLetters" class='wrongLetters'></span> <!--make the place where you wrong letters will appear-->
     <br>
-    <span id="correctWord"></span><button onclick="replay()" id="reload">play again.</button>
+    <button onclick="replay()" id="reload">play again.</button> <!--make the play again button-->
 </body>
 </html>

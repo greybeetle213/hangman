@@ -1,13 +1,13 @@
 .wrongLetters {
     font-size: xx-large;
-    text-decoration: line-through;
+    text-decoration: line-through; /*make the line where wrong letters go crossed out*/
 }
 .word {
-    font-size: xx-large;
+    font-size: xx-large; 
 }
 canvas {
-    border: 5px outset black;
+    border: 5px outset black; /*put a border around the canvas*/
 }
 button {
-    display: none;
+    display: none; /*make the play again button invisible*/
 }
