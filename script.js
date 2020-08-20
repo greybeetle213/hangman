@@ -62,7 +62,7 @@ function init(){ // run when the body loads
         }
         }
     }
-    xhttp.open("GET", "nouns.csv", true) // set the XMLHttpRequest to be get nouns.csv (a long list of nouns)
+    xhttp.open("GET", "WordList.csv", true) // set the XMLHttpRequest to be get WordList.csv (a long list of words)
     xhttp.send() // send the request
 
 
