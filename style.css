@@ -1,0 +1,13 @@
+.wrongLetters {
+    font-size: xx-large;
+    text-decoration: line-through;
+}
+.word {
+    font-size: xx-large;
+}
+canvas {
+    border: 5px outset black;
+}
+button {
+    display: none;
+}
