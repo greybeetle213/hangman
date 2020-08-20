@@ -10,16 +10,20 @@
     <body onload="init()">
         <center>
             <h1>Hangman</h1>
-            <br>
-            <canvas id="hangmanCanvas"></canvas> <!--define the canvas-->
-            <br>
-            <span id="word" class="word"></span><!--define the place where correctly guessed letters will appear-->
-            <br>
-            <input type="text" id="input", maxlength="1"> <!--make an input one can only enter one letter into-->
-            <br>
-            <span id="wrongLetters" class='wrongLetters'></span> <!--make the place where the wrong letters will appear-->
-            <br>
-            <button onclick="replay()" id="reload">play again.</button> <!--make the play again button-->
+            <div class="mainDiv"> <!--make the border-->
+                <br>
+                <canvas id="hangmanCanvas"></canvas> <!--define the canvas-->
+                <div class="rightDiv">
+                    <span id="word" class="word"></span><!--define the place where correctly guessed letters will appear-->
+                    <br>
+                    <input type="text" id="input", maxlength="1"> <!--make an input one can only enter one letter into-->
+                    <br>
+                    <span id="wrongLetters" class='wrongLetters'></span> <!--make the place where the wrong letters will appear-->
+                    <br>
+                    <span>win-loss ratio: </span><span>0-0</span> <!--make the place where the score will display-->
+                    <button onclick="replay()" id="reload">play again.</button> <!--make the play again button-->
+                </div>
+            </div>
         </center>
     </body>
 </html>
