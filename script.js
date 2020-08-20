@@ -1,5 +1,5 @@
 function main(event){
-    var inputedLetter = document.getElementById("input").value
+    var inputedLetter = document.getElementById("input").value.toLowerCase()
     if (event.key == "Enter" && inputedLetter != "" && gameOver == false){
         if (wordToGuess.includes(inputedLetter)){
                 var indexesToChange = []
@@ -54,7 +54,9 @@ function init(){
         wordToGuess = xhttp.responseText
         wordToGuess = wordToGuess.split("\n")
         wordToGuess = wordToGuess[Math.floor(Math.random()*wordToGuess.length)]
+        wordToGuess = wordToGuess.toLowerCase()
         wordToGuess = wordToGuess.split("")
+        wordToGuess = wordToGuess.pop()
         wrongGuesses = -1
         gameOver = false
         for (counter = wordToGuess.length; counter > 0; counter -= 1){
