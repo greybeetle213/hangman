@@ -49,6 +49,7 @@ function init(){
     if (this.readyState == 4 && this.status == 200) {
         // Typical action to be performed when the document is ready:
         wordToGuess = xhttp.responseText
+        wordToGuess = wordToGuess.split("\n")
         wordToGuess = wordToGuess[Math.floor(Math.random()*wordToGuess.length)]
         wordToGuess = wordToGuess.split("")
         wrongGuesses = -1
