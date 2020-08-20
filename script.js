@@ -47,24 +47,23 @@ function init(){
     ctx = document.getElementById("hangmanCanvas").getContext("2d")
     canvasScale = document.getElementById("hangmanCanvas").width/100
     hangmanDrawing = [[5,95,30,95],[17,95,17,20],[17,20,83,20],[17,30,37,20],[83,20,83,30],['circle',83,40,10], [83,50,83,80], [83,50,73,60], [83,50,93,60], [83,80,73,95], [83,80,93,95]]
-    // var xhttp = new XMLHttpRequest()
-    // xhttp.onreadystatechange = function() {
-    // if (this.readyState == 4 && this.status == 200) {
-    //     // Typical action to be performed when the document is ready:
-    //     wordToGuess = xhttp.responseText
-    //     wordToGuess = wordToGuess.split("\n")
-    //     wordToGuess = wordToGuess[Math.floor(Math.random()*wordToGuess.length)]
-    //     wordToGuess = wordToGuess.split("")
-        wordToGuess = ["r","e","e","e","e","e","e"]
+    var xhttp = new XMLHttpRequest()
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        // Typical action to be performed when the document is ready:
+        wordToGuess = xhttp.responseText
+        wordToGuess = wordToGuess.split("\n")
+        wordToGuess = wordToGuess[Math.floor(Math.random()*wordToGuess.length)]
+        wordToGuess = wordToGuess.split("")
         wrongGuesses = -1
         gameOver = false
         for (counter = wordToGuess.length; counter > 0; counter -= 1){
             document.getElementById("word").innerHTML += "_ "
         }
-    //     }
-    // }
-    // xhttp.open("GET", "nouns.csv", true);
-    // xhttp.send();
+        }
+    }
+    xhttp.open("GET", "nouns.csv", true);
+    xhttp.send();
 
 
 }
