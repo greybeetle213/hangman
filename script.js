@@ -56,7 +56,7 @@ function init(){
         wordToGuess = wordToGuess[Math.floor(Math.random()*wordToGuess.length)]
         wordToGuess = wordToGuess.toLowerCase()
         wordToGuess = wordToGuess.split("")
-        wordToGuess = wordToGuess.pop()
+        wordToGuess.pop()
         wrongGuesses = -1
         gameOver = false
         for (counter = wordToGuess.length; counter > 0; counter -= 1){
