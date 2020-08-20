@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function init(){
+            var xhttp = new XMLHttpRequest()
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Typical action to be performed when the document is ready:
+                console.log(xhttp.responseText)
+                }
+            }
+        xhttp.open("GET", "nouns.csv", true);
+        xhttp.send();
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="init()">
+    <canvas id="hangmanCanvas"></canvas>
+    <br>
+    <span id="word" class="word"></span>
+    <br>
+    <input type="text" id="input", maxlength="1">
+    <br>
+    <span id="wrongLetters" class='wrongLetters'></span>
+    <br>
+    <button onclick="replay()" id="reload">play again?</button>
+</body>
+</html>
