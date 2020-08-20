@@ -46,6 +46,7 @@ function randomizeWord() { // this randomizis which word is chosen
     wordToGuess = wordToGuess.toLowerCase() // make every letter in the word lower case
     wordToGuess = wordToGuess.split("") // make each letter in the word a difarant item in a list
     wordToGuess.pop() // remove the last item as it is always a blank string
+    document.getElementById("word").innerHTML = ''
     for (counter = wordToGuess.length; counter > 0; counter -= 1){ // for every letter in the chosen word
         document.getElementById("word").innerHTML += "_ " // add an underscore to the visible word (which was origanlay blank)
     }
