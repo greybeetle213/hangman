@@ -93,5 +93,7 @@ function init(){ // run when the body loads
 }
 function replay(){ // activated if the play again button is pressed. the button is hidded until the game is over
     firstRound = false // let the game know a round has passed
+    gameOver = false // unfrese the game
+    document.getElementById("word").style.color = "black" // make the word black rather than the red or green in was prior
     init() // start a new round
 }
