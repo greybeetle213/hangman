@@ -7,17 +7,19 @@
     <script src="script.js"></script> <!-- import the script -->
     <link rel="stylesheet" href="style.css"> <!-- import the stylesheet -->
 </head>
-<body onload="init()">
-    <h1>Hangman</h1>
-    <br>
-    <canvas id="hangmanCanvas"></canvas> <!--define the canvas-->
-    <br>
-    <span id="word" class="word"></span><!--define the place where correctly guessed letters will appear-->
-    <br>
-    <input type="text" id="input", maxlength="1"> <!--make an input one can only enter one letter into-->
-    <br>
-    <span id="wrongLetters" class='wrongLetters'></span> <!--make the place where the wrong letters will appear-->
-    <br>
-    <button onclick="replay()" id="reload">play again.</button> <!--make the play again button-->
-</body>
+    <body onload="init()">
+        <center>
+            <h1>Hangman</h1>
+            <br>
+            <canvas id="hangmanCanvas"></canvas> <!--define the canvas-->
+            <br>
+            <span id="word" class="word"></span><!--define the place where correctly guessed letters will appear-->
+            <br>
+            <input type="text" id="input", maxlength="1"> <!--make an input one can only enter one letter into-->
+            <br>
+            <span id="wrongLetters" class='wrongLetters'></span> <!--make the place where the wrong letters will appear-->
+            <br>
+            <button onclick="replay()" id="reload">play again.</button> <!--make the play again button-->
+        </center>
+    </body>
 </html>
