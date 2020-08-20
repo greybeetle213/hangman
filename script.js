@@ -1,5 +1,5 @@
 function main(event){
-    var inputedLetter = document.getElementById("input").value
+    var inputedLetter = document.getElementById("input").value.toLowerCase()
     if (event.key == "Enter" && inputedLetter != "" && gameOver == false){
         if (wordToGuess.includes(inputedLetter)){
                 var indexesToChange = []
