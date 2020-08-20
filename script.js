@@ -29,10 +29,10 @@ function main(event){ // The main functoin. Triggered when a key is pressed in t
                 ctx.arc(hangmanDrawing[wrongGuesses][1]*canvasScale,hangmanDrawing[wrongGuesses][2]*canvasScale,hangmanDrawing[wrongGuesses][3]*canvasScale,0,2*Math.PI) // set the thing to be drawn to be a circle whichs position is dictated by hangmanDrawing
             }
             ctx.stroke() // draw the things set by lineTo and arc
-            if(wrongGuesses == 10){ // if ten wrong guesses have been made and therefor the hangman been fully drawn
+            if(wrongGuesses == 10){ // if ten wrong guesses have been made and therefore the hangman been fully drawn
                 gameOver = true // end the game
-                document.getElementById("word").innerHTML = wordToGuess.join(" ") // set the guessed word to the correct word revaing it
-                document.getElementById("word").style.color = "red" // set the gussed words color (now the correct word) to be red
+                document.getElementById("word").innerHTML = wordToGuess.join(" ") // set the guessed word to the correct word revealing it
+                document.getElementById("word").style.color = "red" // set the guessed words color (now the correct word) to be red
                 document.getElementById("reload").style.display = "unset" // show the play again button
             }
         }
@@ -44,7 +44,7 @@ function init(){ // run when the body loads
     document.getElementById("hangmanCanvas").height = window.innerWidth/3 // size the canvas based on the size of the window
     document.getElementById("input").addEventListener("keydown", function(event){main(event)}) // make it so that when a key is pressed inside the input box main(event) will run with event being the event 
     ctx = document.getElementById("hangmanCanvas").getContext("2d") // get the context of the canvas
-    canvasScale = document.getElementById("hangmanCanvas").width/100 // create a unit equil to 1/100
+    canvasScale = document.getElementById("hangmanCanvas").width/100 // create a unit equal to 1/100 of the canvas
     hangmanDrawing = [[5,95,30,95],[17,95,17,20],[17,20,83,20],[17,30,37,20],[83,20,83,30],['circle',83,40,10], [83,50,83,80], [83,50,73,60], [83,50,93,60], [83,80,73,95], [83,80,93,95]] // the positions for all thi e lines in the hangman
     var xhttp = new XMLHttpRequest() // create a XMLHttpRequest called xhhtp
     xhttp.onreadystatechange = function() { // when the XMLHttpRequest becomes ready (the file with the words in it is loaded) run a function
