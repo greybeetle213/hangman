@@ -51,6 +51,7 @@ function init(){
         wordToGuess = xhttp.responseText
         wordToGuess = wordToGuess.split("\n")
         wordToGuess = wordToGuess[Math.floor(Math.random()*wordToGuess.length-1)]
+        wordToGuess = wordToGuess.toLowerCase()
         wordToGuess = wordToGuess.split("")
         wrongGuesses = -1
         gameOver = false
