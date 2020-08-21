@@ -90,6 +90,10 @@ function init(){ // run when the body loads
                 alert("you cannot put angled brackets in your name")
                 playerName = ''
             }
+            if (playerName.length < 20){
+                alert("your name cannot be more than 20 characters")
+                playerName = ''
+            }
         }
         document.getElementById("name").innerHTML = playerName + "'s win-loss ratio: "
     } else { // if it is not the first round
