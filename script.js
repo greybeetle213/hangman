@@ -80,7 +80,7 @@ function init(){ // run when the body loads
         xhttp.open("GET", "WordList.csv", true) // set the XMLHttpRequest to be get WordList.csv (a long list of words)
         xhttp.send() // send the request
         playerName = false // sets the playername to something that cant be inputted
-        while (playerName == false && playerName.includes("<") == false && playerName.includes("<") == false){ // while one has now been assigened
+        while (playerName == false){ // while one has now been assigened
             playerName = window.prompt("What is your name?","") // asks for a name
             if(playerName.includes("<") || playerName.includes(">")){
                 alert("you cannot put angled brackets in your name")
