@@ -1,4 +1,48 @@
 firstRound = true // makes the game run extra lines to start with
+function init(){ // run when the body loads
+    document.getElementById("hangmanCanvas").width = window.innerWidth/3 // size the canvas based on the size of the window
+    document.getElementById("hangmanCanvas").height = window.innerWidth/3 // size the canvas based on the size of the window
+    document.getElementById("input").addEventListener("keydown", function(event){main(event)}) // make it so that when a key is pressed inside the input box main(event) will run with event being the event 
+    ctx = document.getElementById("hangmanCanvas").getContext("2d") // get the context of the canvas
+    canvasScale = document.getElementById("hangmanCanvas").width/100 // create a unit equal to 1/100 of the canvas
+    hangmanDrawing = [[5,95,30,95],[17,95,17,20],[17,20,83,20],[17,30,37,20],[83,20,83,30],['circle',83,40,10], [83,50,83,70], [83,50,73,60], [83,50,93,60], [83,70,73,85], [83,70,93,85]] // the positions for all the lines in the hangman
+    ctx.lineWidth = 10
+    if (firstRound == true){   // if the game is on the first round
+        wins = 0 // define wins as 0
+        losses = 0 // define lossed as 0
+        var xhttp = new XMLHttpRequest() // create a XMLHttpRequest called xhhtp
+        xhttp.onreadystatechange = function() { // when the XMLHttpRequest becomes ready (the file with the words in it is loaded) run a function
+            if (this.readyState == 4 && this.status == 200) {
+                allWords = xhttp.responseText // set wordToGuess to be the contense of the file
+                allWords = allWords.split("\n") // turn the file into a list where the delimters are where there were origanaly line breaks
+                randomizeWord() // randomize the word
+                gameOver = false // define gameOver when this is true most of main  will not run
+            }
+        }
+        xhttp.open("GET", "WordList.csv", true) // set the XMLHttpRequest to be get WordList.csv (a long list of words)
+        xhttp.send() // send the request
+        playerName = '' // sets the playername to something that cant be inputted
+        while (playerName == ''){ // while one has now been assigened
+            playerName = window.prompt("What is your name?","") // asks for a name
+            if(playerName == "" || playerName == null){ // if the player left the input box empty or the box has been canceled
+                alert("your name cannot be blank") // tell them they must put somthing in it
+                playerName = "" // make playername a blank string as it will crash if the box was canceled and playename is left as null
+            }
+            if(playerName.includes("<") || playerName.includes(">")){ // if there are angle brackets 
+                alert("you cannot put angled brackets in your name") // tell the player they cannot have angled brackets
+                playerName = '' // set the players name to be black as angled brackets signify html tags
+            }
+            if (playerName.length < 20){
+                alert("your name cannot be more than 20 characters")
+                playerName = ''
+            }
+        }
+        document.getElementById("name").innerHTML = playerName + "'s win-loss ratio: "
+    } else { // if it is not the first round
+        randomizeWord() // randomize what the word is and do other setup
+    }
+
+}
 function main(event){ // The main functoin. Triggered when a key is pressed in the input box.
     var inputedLetter = document.getElementById("input").value.toLowerCase() // The value of the text input in lower case.
     if (event.key == "Enter" && inputedLetter != "" && gameOver == false && inputedLetter.length == 1){ // If the key that was pressed is enter, the game has not been won or lost, and the value of the input box is only one character.
@@ -57,50 +101,7 @@ function randomizeWord() { // this randomizis which word is chosen
     document.getElementById("wrongLetters").innerHTML = '' // remove all wrong letters that were displayed prior
     wrongGuesses = -1 // set the number of wrong guesses to -1 so when 1 is added it becomes 0
 }
-function init(){ // run when the body loads
-    document.getElementById("hangmanCanvas").width = window.innerWidth/3 // size the canvas based on the size of the window
-    document.getElementById("hangmanCanvas").height = window.innerWidth/3 // size the canvas based on the size of the window
-    document.getElementById("input").addEventListener("keydown", function(event){main(event)}) // make it so that when a key is pressed inside the input box main(event) will run with event being the event 
-    ctx = document.getElementById("hangmanCanvas").getContext("2d") // get the context of the canvas
-    canvasScale = document.getElementById("hangmanCanvas").width/100 // create a unit equal to 1/100 of the canvas
-    hangmanDrawing = [[5,95,30,95],[17,95,17,20],[17,20,83,20],[17,30,37,20],[83,20,83,30],['circle',83,40,10], [83,50,83,80], [83,50,73,60], [83,50,93,60], [83,80,73,95], [83,80,93,95]] // the positions for all the lines in the hangman
-    ctx.lineWidth = 10
-    if (firstRound == true){   // if the game is on the first round
-        wins = 0 // define wins as 0
-        losses = 0 // define lossed as 0
-        var xhttp = new XMLHttpRequest() // create a XMLHttpRequest called xhhtp
-        xhttp.onreadystatechange = function() { // when the XMLHttpRequest becomes ready (the file with the words in it is loaded) run a function
-            if (this.readyState == 4 && this.status == 200) {
-                allWords = xhttp.responseText // set wordToGuess to be the contense of the file
-                allWords = allWords.split("\n") // turn the file into a list where the delimters are where there were origanaly line breaks
-                randomizeWord() // randomize the word
-                gameOver = false // define gameOver when this is true most of main  will not run
-            }
-        }
-        xhttp.open("GET", "WordList.csv", true) // set the XMLHttpRequest to be get WordList.csv (a long list of words)
-        xhttp.send() // send the request
-        playerName = '' // sets the playername to something that cant be inputted
-        while (playerName == ''){ // while one has now been assigened
-            playerName = window.prompt("What is your name?","") // asks for a name
-            if(playerName == "" || playerName == null){ // if the player left the input box empty or the box has been canceled
-                alert("your name cannot be blank") // tell them they must put somthing in it
-                playerName = "" // make playername a blank string as it will crash if the box was canceled and playename is left as null
-            }
-            if(playerName.includes("<") || playerName.includes(">")){
-                alert("you cannot put angled brackets in your name")
-                playerName = ''
-            }
-            if (playerName.length < 20){
-                alert("your name cannot be more than 20 characters")
-                playerName = ''
-            }
-        }
-        document.getElementById("name").innerHTML = playerName + "'s win-loss ratio: "
-    } else { // if it is not the first round
-        randomizeWord() // randomize what the word is and do other setup
-    }
 
-}
 function replay(){ // activated if the play again button is pressed. the button is hidded until the game is over
     firstRound = false // let the game know a round has passed
     gameOver = false // unfrese the game
