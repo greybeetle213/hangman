@@ -46,11 +46,12 @@ function randomizeWord() { // this randomizis which word is chosen
     wordToGuess = wordToGuess.toLowerCase() // make every letter in the word lower case
     wordToGuess = wordToGuess.split("") // make each letter in the word a difarant item in a list
     wordToGuess.pop() // remove the last item as it is always a blank string
-    document.getElementById("word").innerHTML = ''
+    document.getElementById("word").innerHTML = '' // clear all letters prior in the guessable word
     for (counter = wordToGuess.length; counter > 0; counter -= 1){ // for every letter in the chosen word
         document.getElementById("word").innerHTML += "_ " // add an underscore to the visible word (which was origanlay blank)
     }
-    document.getElementById("wrongLetters").innerHTML = ''
+    document.getElementById("wrongLetters").innerHTML = '' // remove all wrong letters that were displayed prior
+    wrongGuesses = -1 // set the number of wrong guesses to -1 so when 1 is added it becomes 0
 }
 function init(){ // run when the body loads
     document.getElementById("hangmanCanvas").width = window.innerWidth/3 // size the canvas based on the size of the window
@@ -59,16 +60,15 @@ function init(){ // run when the body loads
     ctx = document.getElementById("hangmanCanvas").getContext("2d") // get the context of the canvas
     canvasScale = document.getElementById("hangmanCanvas").width/100 // create a unit equal to 1/100 of the canvas
     hangmanDrawing = [[5,95,30,95],[17,95,17,20],[17,20,83,20],[17,30,37,20],[83,20,83,30],['circle',83,40,10], [83,50,83,80], [83,50,73,60], [83,50,93,60], [83,80,73,95], [83,80,93,95]] // the positions for all thi e lines in the hangman
-    if (firstRound == true){   
-        wins = 0
-        losses = 0     
+    if (firstRound == true){   // if the game is on the first round
+        wins = 0 // define wins as 0
+        losses = 0 // define lossed as 0
         var xhttp = new XMLHttpRequest() // create a XMLHttpRequest called xhhtp
         xhttp.onreadystatechange = function() { // when the XMLHttpRequest becomes ready (the file with the words in it is loaded) run a function
             if (this.readyState == 4 && this.status == 200) {
                 allWords = xhttp.responseText // set wordToGuess to be the contense of the file
                 allWords = allWords.split("\n") // turn the file into a list where the delimters are where there were origanaly line breaks
                 randomizeWord() // randomize the word
-                wrongGuesses = -1 // set the number of wrong guesses to -1 so when 1 is added it becomes 0
                 gameOver = false // define gameOver when this is true most of main  will not run
             }
         }
@@ -79,7 +79,7 @@ function init(){ // run when the body loads
             if (this.readyState == 4 && this.status == 200) {
                 allWords = xhttp.responseText // set wordToGuess to be the contense of the file
                 allWords = allWords.split("\n") // turn the file into a list where the delimters are where there were origanaly line breaks
-                randomizeWord() // randomize the word
+                randomizeWord() // randomize the word and do other setup
                 wrongGuesses = -1 // set the number of wrong guesses to -1 so when 1 is added it becomes 0
                 gameOver = false // define gameOver when this is true most of main  will not run
             }
@@ -87,7 +87,7 @@ function init(){ // run when the body loads
         xhttp.open("GET", "WordList.csv", true) // set the XMLHttpRequest to be get WordList.csv (a long list of words)
         xhttp.send() // send the request
     } else {
-        randomizeWord()
+        randomizeWord() // randomize what the word is and do other setup
     }
 
 }
