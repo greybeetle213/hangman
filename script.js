@@ -79,12 +79,12 @@ function init(){ // run when the body loads
         }
         xhttp.open("GET", "WordList.csv", true) // set the XMLHttpRequest to be get WordList.csv (a long list of words)
         xhttp.send() // send the request
-        playerName = false // sets the playername to something that cant be inputted
-        while (playerName == false){ // while one has now been assigened
+        playerName = 'false' // sets the playername to something that cant be inputted
+        while (playerName == 'false'){ // while one has now been assigened
             playerName = window.prompt("What is your name?","") // asks for a name
             if(playerName.includes("<") || playerName.includes(">")){
                 alert("you cannot put angled brackets in your name")
-                playerName = false
+                playerName = 'false'
             }
         }
         document.getElementById("name").innerHTML = playerName + "'s win-loss ratio: "
