@@ -32,7 +32,7 @@ function init(){ // run when the body loads
                 alert("you cannot put angled brackets in your name") // tell the player they cannot have angled brackets
                 playerName = '' // set the players name to be black as angled brackets signify html tags
             }
-            if (playerName.length < 20){
+            if (playerName.length > 20){
                 alert("your name cannot be more than 20 characters")
                 playerName = ''
             }
