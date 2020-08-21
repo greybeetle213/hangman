@@ -8,9 +8,6 @@
 canvas {
     display: inline-block; /*make the canvas go next to the div*/
 }
-button {
-    display: none; /*make the play again button invisible*/
-}
 .rightDiv {
     display: inline-block;/*make the div go next to the canvas*/
     text-align: center;

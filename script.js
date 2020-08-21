@@ -19,7 +19,7 @@ function main(event){ // The main functoin. Triggered when a key is pressed in t
                 wins ++ // add one to wins
                 document.getElementById("winLossRatio").innerHTML = wins + "-" + losses // display the new win-loss ratio
                 document.getElementById("word").style.color = "green" // set the guessed word to green
-                document.getElementById("reload").style.display = "unset" // make the play again button visible
+                document.getElementById("reload").disabled = false // make the play again button work
             }
         } else { // if the word does not include the guessed letter
             document.getElementById("wrongLetters").innerHTML += inputedLetter + " " // add the guessed letter to the line of crossed out letters at the bottom of the page followed by a space
@@ -38,7 +38,7 @@ function main(event){ // The main functoin. Triggered when a key is pressed in t
                 document.getElementById("winLossRatio").innerHTML = wins + "-" + losses // display the new win-loss ratio
                 document.getElementById("word").innerHTML = wordToGuess.join(" ") // set the guessed word to the correct word revealing it
                 document.getElementById("word").style.color = "red" // set the guessed words color (now the correct word) to be red
-                document.getElementById("reload").style.display = "unset" // show the play again button
+                document.getElementById("reload").disabled = false // enable the play again button
 
             }
         }
@@ -98,6 +98,7 @@ function init(){ // run when the body loads
 function replay(){ // activated if the play again button is pressed. the button is hidded until the game is over
     firstRound = false // let the game know a round has passed
     gameOver = false // unfrese the game
+    document.getElementById("reload").disabled = true
     document.getElementById("word").style.color = "black" // make the word black rather than the red or green in was prior
     init() // start a new round
 }
