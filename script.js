@@ -64,8 +64,8 @@ function init(){ // run when the body loads
     ctx = document.getElementById("hangmanCanvas").getContext("2d") // get the context of the canvas
     canvasScale = document.getElementById("hangmanCanvas").width/100 // create a unit equal to 1/100 of the canvas
     hangmanDrawing = [[5,95,30,95],[17,95,17,20],[17,20,83,20],[17,30,37,20],[83,20,83,30],['circle',83,40,10], [83,50,83,80], [83,50,73,60], [83,50,93,60], [83,80,73,95], [83,80,93,95]] // the positions for all the lines in the hangman
+    ctx.lineWidth = 10
     if (firstRound == true){   // if the game is on the first round
-        ctx.lineWidth = 10
         wins = 0 // define wins as 0
         losses = 0 // define lossed as 0
         var xhttp = new XMLHttpRequest() // create a XMLHttpRequest called xhhtp
