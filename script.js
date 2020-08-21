@@ -16,6 +16,8 @@ function main(event){ // The main functoin. Triggered when a key is pressed in t
             document.getElementById("word").innerHTML = oldletters.join("") // set the actual display to the duplacate display converted to a string
             if (oldletters.includes("_") == false){ // if the are no _s (unguessed letters) in the duplacate display
                 gameOver = true // end the game
+                wins ++ // add one to wins
+                document.getElementById("winLossRatio").innerHTML = wins + "-" + losses // display the new win-loss ratio
                 document.getElementById("word").style.color = "green" // set the guessed word to green
                 document.getElementById("reload").style.display = "unset" // make the play again button visible
             }
@@ -25,13 +27,15 @@ function main(event){ // The main functoin. Triggered when a key is pressed in t
             ctx.beginPath() // start a drawn path (for another line in the hangman)
             if (hangmanDrawing[wrongGuesses][0] != "circle"){ // if the first item of list inside of hangmanDrawing whichs index relates to the number of wrong guesses you have made is not circle
                 ctx.moveTo(hangmanDrawing[wrongGuesses][0]*canvasScale, hangmanDrawing[wrongGuesses][1]*canvasScale) // to the posstion dictated by the list
-                ctx.lineTo(hangmanDrawing[wrongGuesses][2]*canvasScale,hangmanDrawing[wrongGuesses][3]*canvasScale) // set the thing to be drawn to be a line whichs position is dictated by hangmanDrawing
+                ctx.lineTo(hangmanDrawing[wrongGuesses][2]*canvasScale, hangmanDrawing[wrongGuesses][3]*canvasScale) // set the thing to be drawn to be a line whichs position is dictated by hangmanDrawing
             } else { // if the first item of the list is circle
-                ctx.arc(hangmanDrawing[wrongGuesses][1]*canvasScale,hangmanDrawing[wrongGuesses][2]*canvasScale,hangmanDrawing[wrongGuesses][3]*canvasScale,0,2*Math.PI) // set the thing to be drawn to be a circle whichs position is dictated by hangmanDrawing
+                ctx.arc(hangmanDrawing[wrongGuesses][1]*canvasScale, hangmanDrawing[wrongGuesses][2]*canvasScale, hangmanDrawing[wrongGuesses][3]*canvasScale, 0, 2*Math.PI) // set the thing to be drawn to be a circle whichs position is dictated by hangmanDrawing
             }
             ctx.stroke() // draw the things set by lineTo and arc
             if(wrongGuesses == 10){ // if ten wrong guesses have been made and therefore the hangman been fully drawn
                 gameOver = true // end the game
+                losses ++ // add one to losses
+                document.getElementById("winLossRatio").innerHTML = wins + "-" + losses // display the new win-loss ratio
                 document.getElementById("word").innerHTML = wordToGuess.join(" ") // set the guessed word to the correct word revealing it
                 document.getElementById("word").style.color = "red" // set the guessed words color (now the correct word) to be red
                 document.getElementById("reload").style.display = "unset" // show the play again button
@@ -79,14 +83,14 @@ function init(){ // run when the body loads
             if (this.readyState == 4 && this.status == 200) {
                 allWords = xhttp.responseText // set wordToGuess to be the contense of the file
                 allWords = allWords.split("\n") // turn the file into a list where the delimters are where there were origanaly line breaks
-                randomizeWord() // randomize the word and do other setup
+                randomizeWord() // randomize the word and do other setup 
                 wrongGuesses = -1 // set the number of wrong guesses to -1 so when 1 is added it becomes 0
                 gameOver = false // define gameOver when this is true most of main  will not run
             }
         }
         xhttp.open("GET", "WordList.csv", true) // set the XMLHttpRequest to be get WordList.csv (a long list of words)
         xhttp.send() // send the request
-    } else {
+    } else { // if it is not the first round
         randomizeWord() // randomize what the word is and do other setup
     }
 
