@@ -34,9 +34,15 @@ function init(){ // run when the body loads
                 alert("you cannot put angled brackets in your name") // tell the player they cannot have angled brackets
                 playerName = '' // set the players name to be black as angled brackets signify html tags
             }
-            if (playerName.length > 20){
-                alert("your name cannot be more than 20 characters")
-                playerName = ''
+            if (playerName.length > 20){ // if the players name is longer than 20 letters
+                alert("your name cannot be more than 20 characters") // tell the player to shorten it
+                playerName = '' // set the stored name to an empty string
+            }
+            if (playerName.split('')[0] == " "){
+                playerName = playerName.substring(1,playerName.length)
+            }
+            if (playerName.split('')[playerName.length-1] == " "){
+                playerName = playerName.substring(playerName.length-1,playerName.length)
             }
         }
         document.getElementById("name").innerHTML = playerName + "'s win-loss ratio: "
