@@ -42,7 +42,7 @@ function init(){ // run when the body loads
                 playerName = playerName.substring(1,playerName.length)
             }
             if (playerName.split('')[playerName.length-1] == " "){
-                playerName = playerName.substring(playerName.length-1,playerName.length)
+                playerName = playerName.substring(0,playerName.length-1)
             }
         }
         document.getElementById("name").innerHTML = playerName + "'s win-loss ratio: "
