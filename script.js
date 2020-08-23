@@ -24,11 +24,13 @@ function init(){ // run when the body loads
         playerName = '' // sets the playername to something that cant be inputted
         while (playerName == ''){ // while one has now been assigened
             playerName = window.prompt("What is your name?","") // asks for a name
-            if(playerName == "" || playerName == null){ // if the player left the input box empty or the box has been canceled
-                alert("your name cannot be blank") // tell them they must put somthing in it
-                playerName = "" // make playername a blank string as it will crash if the box was canceled and playename is left as null
+            if (playerName == null){ // if the input box was canceled
+                window.location = "https://google.com" // go to a blank tab
             }
-            if(playerName.includes("<") || playerName.includes(">")){ // if there are angle brackets 
+            if(playerName == ""){ // if the player left the input box empty
+                alert("your name cannot be blank") // tell them they must put somthing in it
+            }
+            if (playerName.includes("<") || playerName.includes(">")){ // if there are angle brackets 
                 alert("you cannot put angled brackets in your name") // tell the player they cannot have angled brackets
                 playerName = '' // set the players name to be black as angled brackets signify html tags
             }
