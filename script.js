@@ -6,7 +6,9 @@ function init(){ // run when the body loads
     ctx = document.getElementById("hangmanCanvas").getContext("2d") // get the context of the canvas
     canvasScale = document.getElementById("hangmanCanvas").width/100 // create a unit equal to 1/100 of the canvas
     hangmanDrawing = [[5,95,30,95],[17,95,17,20],[17,20,83,20],[17,30,37,20],[83,20,83,30],['circle',83,40,10], [83,50,83,70], [83,50,73,60], [83,50,93,60], [83,70,73,85], [83,70,93,85]] // the positions for all the lines in the hangman
-    ctx.lineWidth = 10
+    acceptableCharacters = 'abcdefghijklmnopqrstuvwxyz' // characters that can be put in the input box
+    acceptableCharacters = acceptableCharacters.split('') //make the accectaple characters a list
+    ctx.lineWidth = 10 // makes the lines on the hangman drawing thicker.
     if (firstRound == true){   // if the game is on the first round
         wins = 0 // define wins as 0
         losses = 0 // define lossed as 0
@@ -53,7 +55,11 @@ function init(){ // run when the body loads
 }
 function main(event){ // The main functoin. Triggered when a key is pressed in the input box.
     var inputedLetter = document.getElementById("input").value.toLowerCase() // The value of the text input in lower case.
-    if (event.key == "Enter" && inputedLetter != "" && gameOver == false && inputedLetter.length == 1){ // If the key that was pressed is enter, the game has not been won or lost, and the value of the input box is only one character.
+    if (acceptableCharacters.includes(inputedLetter) == false){ // if the character that has been inputed is not in the list of acceptable characters
+        inputedLetter = '' // set the inputed letter to blank
+        document.getElementById("input").value = '' // clear the input box
+    }
+    if (event.key == "Enter" && inputedLetter != "" && gameOver == false && inputedLetter.length == 1){ // If the key that was pressed is enter, the game has not been won or lost, and the value of the input box is one character.
         if (wordToGuess.includes(inputedLetter)){ // If the letter in the input box is in the word that is being guessed
                 var indexesToChange = [] // This will be the indexes of the word that the guessed letter is in
             for (counter = 0; counter < wordToGuess.length; counter ++){ // For every letter in the word to be guessed
@@ -84,7 +90,7 @@ function main(event){ // The main functoin. Triggered when a key is pressed in t
                 ctx.arc(hangmanDrawing[wrongGuesses][1]*canvasScale, hangmanDrawing[wrongGuesses][2]*canvasScale, hangmanDrawing[wrongGuesses][3]*canvasScale, 0, 2*Math.PI) // set the thing to be drawn to be a circle whichs position is dictated by hangmanDrawing
             }
             ctx.stroke() // draw the things set by lineTo and arc
-            if(wrongGuesses == 10){ // if ten wrong guesses have been made and therefore the hangman been fully drawn
+            if(wrongGuesses == hangmanDrawing.length-1){ // if ten wrong guesses have been made and therefore the hangman been fully drawn
                 gameOver = true // end the game
                 losses ++ // add one to losses
                 document.getElementById("winLossRatio").innerHTML = wins + "-" + losses // display the new win-loss ratio
@@ -115,5 +121,6 @@ function replay(){ // activated if the play again button is pressed. the button 
     gameOver = false // unfrese the game
     document.getElementById("reload").disabled = true
     document.getElementById("word").style.color = "black" // make the word black rather than the red or green in was prior
+    document.getElementById("input").value = ""
     init() // start a new round
 }
