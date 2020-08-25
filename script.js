@@ -8,7 +8,7 @@ function init(){ // run when the body loads
     hangmanDrawing = [[5,95,30,95],[17,95,17,20],[17,20,83,20],[17,30,37,20],[83,20,83,30],['circle',83,40,10], [83,50,83,70], [83,50,73,60], [83,50,93,60], [83,70,73,85], [83,70,93,85]] // the positions for all the lines in the hangman
     acceptableCharacters = 'abcdefghijklmnopqrstuvwxyz' // characters that can be put in the input box
     acceptableCharacters = acceptableCharacters.split('') //make the accectaple characters a list
-    valueIsUneccepable = false //will stop the character from regestering
+    valueIsUneccepable = false //will stop the character from regestering if set to true
     ctx.lineWidth = 10 // makes the lines on the hangman drawing thicker.
     if (firstRound == true){   // if the game is on the first round
         wins = 0 // define wins as 0
@@ -56,6 +56,7 @@ function init(){ // run when the body loads
 }
 function main(event){ // The main functoin. Triggered when a key is pressed in the input box.
     var inputedLetter = document.getElementById("input").value.toLowerCase() // The value of the text input in lower case.
+    valueIsUneccepable = false
     if (acceptableCharacters.includes(inputedLetter) == false){ // if the character that has been inputed is not in the list of acceptable characters
         inputedLetter = '' // set the inputed letter to blank
         valueIsUneccepable = true
@@ -101,7 +102,7 @@ function main(event){ // The main functoin. Triggered when a key is pressed in t
 
             }
         }
-        if(valueIsUneccepable = false){ // if the inputed character can be used
+        if(valueIsUneccepable == false){ // if the inputed character can be used
             document.getElementById("input").value = "" // clear the input box
         }
     }
