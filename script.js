@@ -8,6 +8,7 @@ function init(){ // run when the body loads
     hangmanDrawing = [[5,95,30,95],[17,95,17,20],[17,20,83,20],[17,30,37,20],[83,20,83,30],['circle',83,40,10], [83,50,83,70], [83,50,73,60], [83,50,93,60], [83,70,73,85], [83,70,93,85]] // the positions for all the lines in the hangman
     acceptableCharacters = 'abcdefghijklmnopqrstuvwxyz' // characters that can be put in the input box
     acceptableCharacters = acceptableCharacters.split('') //make the accectaple characters a list
+    valueIsUneccepable = false //will stop the character from regestering
     ctx.lineWidth = 10 // makes the lines on the hangman drawing thicker.
     if (firstRound == true){   // if the game is on the first round
         wins = 0 // define wins as 0
@@ -29,9 +30,6 @@ function init(){ // run when the body loads
             if (playerName == null){ // if the input box was canceled
                 window.location = "https://google.com" // go to a blank tab
             }
-            if(playerName == ""){ // if the player left the input box empty
-                alert("your name cannot be blank") // tell them they must put somthing in it
-            }
             if (playerName.includes("<") || playerName.includes(">")){ // if there are angle brackets 
                 alert("you cannot put angled brackets in your name") // tell the player they cannot have angled brackets
                 playerName = '' // set the players name to be black as angled brackets signify html tags
@@ -40,14 +38,17 @@ function init(){ // run when the body loads
                 alert("your name cannot be more than 20 characters") // tell the player to shorten it
                 playerName = '' // set the stored name to an empty string
             }
-            if (playerName.split('')[0] == " "){
-                playerName = playerName.substring(1,playerName.length)
+            while (playerName.split('')[0] == " "){ // if the first letter of the name is a space
+                playerName = playerName.substring(1,playerName.length) // remove the first letter of the name
             }
-            if (playerName.split('')[playerName.length-1] == " "){
-                playerName = playerName.substring(0,playerName.length-1)
+            while (playerName.split('')[playerName.length-1] == " "){ // if the last letter of the name is a space
+                playerName = playerName.substring(0,playerName.length-1) // remove the last letter of the name
+            }
+            if(playerName == ""){ // if the player left the input box empty
+                alert("your name cannot be blank") // tell them they must put somthing in it
             }
         }
-        document.getElementById("name").innerHTML = playerName + "'s win-loss ratio: "
+        document.getElementById("name").innerHTML = playerName + "'s win-loss ratio: " // display player's win-loss ratio: before the players score
     } else { // if it is not the first round
         randomizeWord() // randomize what the word is and do other setup
     }
@@ -57,7 +58,7 @@ function main(event){ // The main functoin. Triggered when a key is pressed in t
     var inputedLetter = document.getElementById("input").value.toLowerCase() // The value of the text input in lower case.
     if (acceptableCharacters.includes(inputedLetter) == false){ // if the character that has been inputed is not in the list of acceptable characters
         inputedLetter = '' // set the inputed letter to blank
-        document.getElementById("input").value = '' // clear the input box
+        valueIsUneccepable = true
     }
     if (event.key == "Enter" && inputedLetter != "" && gameOver == false && inputedLetter.length == 1){ // If the key that was pressed is enter, the game has not been won or lost, and the value of the input box is one character.
         if (wordToGuess.includes(inputedLetter)){ // If the letter in the input box is in the word that is being guessed
@@ -100,7 +101,9 @@ function main(event){ // The main functoin. Triggered when a key is pressed in t
 
             }
         }
-        document.getElementById("input").value = "" // clear the input box
+        if(valueIsUneccepable = false){ // if the inputed character can be used
+            document.getElementById("input").value = "" // clear the input box
+        }
     }
 }
 function randomizeWord() { // this randomizis which word is chosen
