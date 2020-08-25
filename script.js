@@ -5,21 +5,22 @@ function init(){ // run when the body loads
     document.getElementById("input").addEventListener("keydown", function(event){main(event)}) // make it so that when a key is pressed inside the input box main(event) will run with event being the event 
     ctx = document.getElementById("hangmanCanvas").getContext("2d") // get the context of the canvas
     canvasScale = document.getElementById("hangmanCanvas").width/100 // create a unit equal to 1/100 of the canvas
+    ctx.lineWidth = 10 // makes the lines on the hangman drawing thicker.
     hangmanDrawing = [[5,95,30,95],[17,95,17,20],[17,20,83,20],[17,30,37,20],[83,20,83,30],['circle',83,40,10], [83,50,83,70], [83,50,73,60], [83,50,93,60], [83,70,73,85], [83,70,93,85]] // the positions for all the lines in the hangman
     acceptableCharacters = 'abcdefghijklmnopqrstuvwxyz' // characters that can be put in the input box
     acceptableCharacters = acceptableCharacters.split('') //make the accectaple characters a list
-    valueIsUneccepable = false //will stop the character from regestering if set to true
-    ctx.lineWidth = 10 // makes the lines on the hangman drawing thicker.
+    valueIsUneccepable = false //will stop the character from regestering
+    maxNameLength = 20 // make the most charaters you can put in the players name be 20
     if (firstRound == true){   // if the game is on the first round
         wins = 0 // define wins as 0
-        losses = 0 // define lossed as 0
+        losses = 0 // define losses as 0
         var xhttp = new XMLHttpRequest() // create a XMLHttpRequest called xhhtp
         xhttp.onreadystatechange = function() { // when the XMLHttpRequest becomes ready (the file with the words in it is loaded) run a function
             if (this.readyState == 4 && this.status == 200) {
                 allWords = xhttp.responseText // set wordToGuess to be the contense of the file
                 allWords = allWords.split("\n") // turn the file into a list where the delimters are where there were origanaly line breaks
                 randomizeWord() // randomize the word
-                gameOver = false // define gameOver when this is true most of main  will not run
+                gameOver = false // define gameOver. when it is true most of main  will not run
             }
         }
         xhttp.open("GET", "WordList.csv", true) // set the XMLHttpRequest to be get WordList.csv (a long list of words)
@@ -32,10 +33,10 @@ function init(){ // run when the body loads
             }
             if (playerName.includes("<") || playerName.includes(">")){ // if there are angle brackets 
                 alert("you cannot put angled brackets in your name") // tell the player they cannot have angled brackets
-                playerName = '' // set the players name to be black as angled brackets signify html tags
+                playerName = '' // set the players name to be blank, as angled brackets signify html tags
             }
-            if (playerName.length > 20){ // if the players name is longer than 20 letters
-                alert("your name cannot be more than 20 characters") // tell the player to shorten it
+            if (playerName.length > maxNameLength){ // if the players name is longer than 20 letters
+                alert("your name cannot be more than " + maxNameLength + " characters") // tell the player to shorten it
                 playerName = '' // set the stored name to an empty string
             }
             while (playerName.split('')[0] == " "){ // if the first letter of the name is a space
@@ -56,10 +57,9 @@ function init(){ // run when the body loads
 }
 function main(event){ // The main functoin. Triggered when a key is pressed in the input box.
     var inputedLetter = document.getElementById("input").value.toLowerCase() // The value of the text input in lower case.
-    valueIsUneccepable = false
     if (acceptableCharacters.includes(inputedLetter) == false){ // if the character that has been inputed is not in the list of acceptable characters
         inputedLetter = '' // set the inputed letter to blank
-        valueIsUneccepable = true
+        valueIsUneccepable = true // make it so the text box wont be cleared
     }
     if (event.key == "Enter" && inputedLetter != "" && gameOver == false && inputedLetter.length == 1){ // If the key that was pressed is enter, the game has not been won or lost, and the value of the input box is one character.
         if (wordToGuess.includes(inputedLetter)){ // If the letter in the input box is in the word that is being guessed
@@ -74,7 +74,7 @@ function main(event){ // The main functoin. Triggered when a key is pressed in t
                 oldletters[indexesToChange[counter]*2] = inputedLetter // set the corrisponding item in the duplacate of the deplayed text which will be _ to the inputed letter
             }
             document.getElementById("word").innerHTML = oldletters.join("") // set the actual display to the duplacate display converted to a string
-            if (oldletters.includes("_") == false){ // if the are no _s (unguessed letters) in the duplacate display
+            if (oldletters.includes("_") == false){ // if the are no underscores (unguessed letters) in the duplacate display
                 gameOver = true // end the game
                 wins ++ // add one to wins
                 document.getElementById("winLossRatio").innerHTML = wins + "-" + losses // display the new win-loss ratio
@@ -102,7 +102,7 @@ function main(event){ // The main functoin. Triggered when a key is pressed in t
 
             }
         }
-        if(valueIsUneccepable == false){ // if the inputed character can be used
+        if(valueIsUneccepable = false){ // if the inputed character can be used
             document.getElementById("input").value = "" // clear the input box
         }
     }
@@ -113,7 +113,7 @@ function randomizeWord() { // this randomizis which word is chosen
     wordToGuess = wordToGuess.split("") // make each letter in the word a difarant item in a list
     wordToGuess.pop() // remove the last item as it is always a blank string
     document.getElementById("word").innerHTML = '' // clear all letters prior in the guessable word
-    for (counter = wordToGuess.length; counter > 0; counter -= 1){ // for every letter in the chosen word
+    for (counter = wordToGuess.length; counter > 0; counter --){ // for every letter in the chosen word
         document.getElementById("word").innerHTML += "_ " // add an underscore to the visible word (which was origanlay blank)
     }
     document.getElementById("wrongLetters").innerHTML = '' // remove all wrong letters that were displayed prior
@@ -123,8 +123,8 @@ function randomizeWord() { // this randomizis which word is chosen
 function replay(){ // activated if the play again button is pressed. the button is hidded until the game is over
     firstRound = false // let the game know a round has passed
     gameOver = false // unfrese the game
-    document.getElementById("reload").disabled = true
+    document.getElementById("reload").disabled = true // make it so you cannot press the Play Again button
     document.getElementById("word").style.color = "black" // make the word black rather than the red or green in was prior
-    document.getElementById("input").value = ""
+    document.getElementById("input").value = "" // clear the input box
     init() // start a new round
 }

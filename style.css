@@ -3,8 +3,8 @@
     text-decoration: line-through; /*make the line where wrong letters go crossed out*/
 }
 .word {
-    font-size: xx-large; 
-}
+    font-size: xx-large; /*make the place where the correctly guessed letters are have a large font size*/
+} 
 canvas {
     display: inline-block; /*make the canvas go next to the div*/
 }
@@ -16,3 +16,4 @@ canvas {
     border: 5px outset black; /*put a border around the canvas, input, wrongletters, and word to be guessed*/
     display: inline-block;
 }
+
