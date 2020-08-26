@@ -102,7 +102,7 @@ function main(event){ // The main functoin. Triggered when a key is pressed in t
 
             }
         }
-        if(valueIsUneccepable = false){ // if the inputed character can be used
+        if(valueIsUneccepable == false){ // if the inputed character can be used
             document.getElementById("input").value = "" // clear the input box
         }
     }
