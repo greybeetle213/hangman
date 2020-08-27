@@ -1,5 +1,6 @@
 firstRound = true // makes the game run extra lines to start with
 function init(){ // run when the body loads
+    // the variables in this area can be edited to change certain aspects of the game:
     document.getElementById("hangmanCanvas").width = window.innerWidth/3 // size the canvas based on the size of the window
     document.getElementById("hangmanCanvas").height = window.innerWidth/3 // size the canvas based on the size of the window
     document.getElementById("input").addEventListener("keydown", function(event){main(event)}) // make it so that when a key is pressed inside the input box main(event) will run with event being the event 
