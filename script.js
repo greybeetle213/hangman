@@ -57,7 +57,7 @@ function init(){ // run when the body loads
 }
 function main(event){ // The main functoin. Triggered when a key is pressed in the input box.
     var inputedLetter = document.getElementById("input").value.toLowerCase() // The value of the text input in lower case.
-    value = false // resets the value is uneceptable varible so if it is not uneceptable the letter will work
+    valueIsUneccepable = false // resets the value is uneceptable varible so if it is not uneceptable the letter will work
     if (acceptableCharacters.includes(inputedLetter) == false){ // if the character that has been inputed is not in the list of acceptable characters
         inputedLetter = '' // set the inputed letter to blank
         valueIsUneccepable = true // make it so the text box wont be cleared
