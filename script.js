@@ -31,9 +31,6 @@ function init(){ // run when the body loads
             if (playerName == null){ // if the input box was canceled
                 window.location = "https://google.com" // go to a blank tab
             }
-            if (playerName == ""){ // if the player left the input box empty
-                alert("your name cannot be blank") // tell them they must put somthing in it
-            }
             if (playerName.includes("<") || playerName.includes(">")){ // if there are angle brackets 
                 alert("you cannot put angled brackets in your name") // tell the player they cannot have angled brackets
                 playerName = '' // set the players name to be blank, as angled brackets signify html tags
@@ -48,6 +45,9 @@ function init(){ // run when the body loads
             while (playerName.split('')[playerName.length-1] == " "){ // if the last letter of the name is a space
                 playerName = playerName.substring(0,playerName.length-1) // remove the last letter of the name
             }
+            if(playerName == ""){ // if the player left the input box empty
+                alert("your name cannot be blank") // tell them they must put somthing in it
+            }
         }
         document.getElementById("name").innerHTML = playerName + "'s win-loss ratio: " // display player's win-loss ratio: before the players score
     } else { // if it is not the first round
@@ -57,6 +57,7 @@ function init(){ // run when the body loads
 }
 function main(event){ // The main functoin. Triggered when a key is pressed in the input box.
     var inputedLetter = document.getElementById("input").value.toLowerCase() // The value of the text input in lower case.
+    value = false // resets the value is uneceptable varible so if it is not uneceptable the letter will work
     if (acceptableCharacters.includes(inputedLetter) == false){ // if the character that has been inputed is not in the list of acceptable characters
         inputedLetter = '' // set the inputed letter to blank
         valueIsUneccepable = true // make it so the text box wont be cleared
