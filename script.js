@@ -32,14 +32,6 @@ function init(){ // run when the body loads
             if (playerName == null){ // if the input box was canceled
                 window.location = "https://google.com" // go to a blank tab
             }
-            if (playerName.includes("<") || playerName.includes(">")){ // if there are angle brackets 
-                alert("you cannot put angled brackets in your name") // tell the player they cannot have angled brackets
-                playerName = '' // set the players name to be blank, as angled brackets signify html tags
-            }
-            if (playerName.length > maxNameLength){ // if the players name is longer than 20 letters
-                alert("your name cannot be more than " + maxNameLength + " characters") // tell the player to shorten it
-                playerName = '' // set the stored name to an empty string
-            }
             while (playerName.split('')[0] == " "){ // if the first letter of the name is a space
                 playerName = playerName.substring(1,playerName.length) // remove the first letter of the name
             }
@@ -48,6 +40,14 @@ function init(){ // run when the body loads
             }
             if(playerName == ""){ // if the player left the input box empty
                 alert("your name cannot be blank") // tell them they must put somthing in it
+            }
+            if (playerName.includes("<") || playerName.includes(">")){ // if there are angle brackets 
+                alert("you cannot put angled brackets in your name") // tell the player they cannot have angled brackets
+                playerName = '' // set the players name to be blank, as angled brackets signify html tags
+            }
+            if (playerName.length > maxNameLength){ // if the players name is longer than 20 letters
+                alert("your name cannot be more than " + maxNameLength + " characters") // tell the player to shorten it
+                playerName = '' // set the stored name to an empty string
             }
         }
         document.getElementById("name").innerHTML = playerName + "'s win-loss ratio: " // display player's win-loss ratio: before the players score
