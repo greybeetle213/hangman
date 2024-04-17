@@ -3,16 +3,27 @@
     text-decoration: line-through; /*make the line where wrong letters go crossed out*/
 }
 .word {
-    font-size: xx-large; /*make the place where the correctly guessed letters are have a large font size*/
+    font-size: 5vh; /*make the place where the correctly guessed letters are have a large font size*/
 } 
 canvas {
     display: inline-block; /*make the canvas go next to the div*/
+
 }
 .rightDiv {
-    display: inline-block;/*make the div go next to the canvas*/
+    position: absolute;
     text-align: center;
+    background-color: black;
+    top: 40%;
+    right: 1%;
+    button {
+        font-size: 4vw;
+        width: 4vw;
+        background-color: white;
+    }
 }
 .mainDiv {
+    left: 2%;
+    position: absolute;
     border: 5px outset black; /*put a border around the canvas, input, wrongletters, and word to be guessed*/
     display: inline-block;
 }

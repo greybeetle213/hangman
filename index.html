@@ -9,19 +9,42 @@
 </head>
     <body onload="init()"> <!--define the body tag so that when it loads the init function will run-->
         <center>
-            <h1>Hangman</h1>
+            <div class="rightDiv">
+                <button id="qButton" onclick="main('q')">q</button>
+                <button id="wButton" onclick="main('w')">w</button>
+                <button id="eButton" onclick="main('e')">e</button>
+                <button id="rButton" onclick="main('r')">r</button>
+                <button id="tButton" onclick="main('t')">t</button>
+                <button id="yButton" onclick="main('y')">y</button>
+                <button id="uButton" onclick="main('u')">u</button>
+                <button id="iButton" onclick="main('i')">i</button>
+                <button id="oButton" onclick="main('o')">o</button>
+                <button id="pButton" onclick="main('p')">p</button><br>
+                <button id="aButton" onclick="main('a')">a</button>
+                <button id="sButton" onclick="main('s')">s</button>
+                <button id="dButton" onclick="main('d')">d</button>
+                <button id="fButton" onclick="main('f')">f</button>
+                <button id="gButton" onclick="main('g')">g</button>
+                <button id="hButton" onclick="main('h')">h</button>
+                <button id="jButton" onclick="main('j')">j</button>
+                <button id="kButton" onclick="main('k')">k</button>
+                <button id="lButton" onclick="main('l')">l</button><br>
+                <button id="zButton" onclick="main('z')">z</button>
+                <button id="xButton" onclick="main('x')">x</button>
+                <button id="cButton" onclick="main('c')">c</button>
+                <button id="vButton" onclick="main('v')">v</button>
+                <button id="bButton" onclick="main('b')">b</button>
+                <button id="nButton" onclick="main('n')">n</button>
+                <button id="mButton" onclick="main('m')">m</button><br>
+                <button onclick="replay()" id="reload"  style="font-size: 5vw; width: fit-content; display:none;">Play Again</button> <!--make the play again button-->
+            </div>
             <div class="mainDiv"> <!--make the border-->
                 <br>
                 <canvas id="hangmanCanvas"></canvas> <!--define the canvas-->
-                <div class="rightDiv">
+                <div>
                     <span id="word" class="word"></span><!--define the place where correctly guessed letters will appear-->
                     <br>
-                    <input type="text" id="input", maxlength="1"> <!--make an input one can only enter one letter into-->
-                    <br>
-                    <span id="wrongLetters" class='wrongLetters'></span> <!--make the place where the wrong letters will appear-->
-                    <br>
                     <span id="name"></span><span id="winLossRatio">0-0</span> <!--make the place where the score will display-->
-                    <button onclick="replay()" id="reload" disabled=true>Play Again</button> <!--make the play again button-->
                 </div>
             </div>
         </center>
