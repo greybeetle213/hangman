@@ -9,21 +9,22 @@ canvas {
     display: inline-block; /*make the canvas go next to the div*/
 
 }
-.rightDiv {
-    position: absolute;
+.keyboard {
     text-align: center;
     background-color: black;
-    top: 40%;
-    right: 1%;
+    margin: 1vh;
+    padding: 1vh;
+    width: fit-content;
     button {
-        font-size: 4vw;
-        width: 4vw;
+        margin: 0px;
+        padding: 0px;
+        font-size: 7vh;
+        width: 7vh;
+        color: black;
         background-color: white;
     }
 }
 .mainDiv {
-    left: 2%;
-    position: absolute;
     border: 5px outset black; /*put a border around the canvas, input, wrongletters, and word to be guessed*/
     display: inline-block;
 }

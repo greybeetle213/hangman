@@ -1,10 +1,10 @@
 firstRound = true // makes the game run extra lines to start with
 function init(){ // run when the body loads
     // the variables in this area can be edited to change certain aspects of the game:
-    if (window.innerHeight < window.innerWidth/2 || window.innerWidth*0.5 > window.innerHeight*0.8){
-        multiplier = window.innerHeight*0.8
+    if (window.innerHeight < window.innerWidth){
+        multiplier = window.innerHeight*0.6
     }else{
-        multiplier = window.innerWidth*0.5
+        multiplier = window.innerWidth*0.8
     }
     document.getElementById("hangmanCanvas").width = multiplier // size the canvas based on the size of the window
     document.getElementById("hangmanCanvas").height = multiplier // size the canvas based on the size of the window
